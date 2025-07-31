@@ -12,15 +12,12 @@ async function getCompanies() {
       .select({
         id: companies.id,
         name: companies.name,
-        slug: companies.slug,
         description: companies.description,
         logo: companies.logo,
         website: companies.website,
         industry: companies.industry,
         size: companies.size,
         location: companies.location,
-        foundedYear: companies.foundedYear,
-        isVerified: companies.isVerified,
         jobCount: count(jobs.id)
       })
       .from(companies)
@@ -75,11 +72,6 @@ export default async function CompaniesPage() {
                       <h3 className="text-lg font-semibold text-gray-900 truncate">
                         {company.name}
                       </h3>
-                      {company.isVerified && (
-                        <Badge variant="secondary" className="ml-2">
-                          Verified
-                        </Badge>
-                      )}
                     </div>
                     
                     <p className="text-gray-600 text-sm mt-2 line-clamp-2">
@@ -118,7 +110,7 @@ export default async function CompaniesPage() {
                     {/* Actions */}
                     <div className="mt-4 flex items-center justify-between">
                       <Link
-                        href={`/jobs?company=${company.slug}`}
+                        href={`/jobs?company=${company.id}`}
                         className="text-blue-600 hover:text-blue-700 text-sm font-medium"
                       >
                         View Jobs ({company.jobCount})

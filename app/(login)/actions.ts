@@ -22,7 +22,7 @@ import {
 
 async function logActivity(
   userId: number,
-  type: ActivityType,
+  type: typeof ActivityType[keyof typeof ActivityType],
   ipAddress?: string,
   metadata?: string
 ) {
@@ -193,42 +193,9 @@ export const updatePassword = validatedActionWithUser(
     const newPasswordHash = await hashPassword(newPassword);
 
     await Promise.all([
-      db
-        .update(users)
-        .set({ passwordHash: newPasswordHash })
+      db.update(users).set({ passwordHash: newPasswordHash })
         .where(eq(users.id, user.id)),
       logActivity(user.id, ActivityType.UPDATE_PASSWORD)
-    ]);
-
-    return {
-      success: 'Password updated successfully.'
-    };
-  }
-);
-
-const deleteAccountSchema = z.object({
-  password: z.string().min(8).max(100)
-});
-
-export const deleteAccount = validatedActionWithUser(
-  deleteAccountSchema,
-  async (data, _, user) => {
-    const { password } = data;
-
-    const isPasswordValid = await comparePasswords(password, user.passwordHash);
-    if (!isPasswordValid) {
-      return {
-        password,
-        error: 'Incorrect password. Please try again.'
-      };
-    }
-
-    await Promise.all([
-      db
-        .update(users)
-        .set({ deletedAt: new Date() })
-        .where(eq(users.id, user.id)),
-      logActivity(user.id, ActivityType.DELETE_ACCOUNT)
     ]);
 
     (await cookies()).delete('session');

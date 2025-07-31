@@ -1,6 +1,4 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart } from "@/components/charts/BarChart";
-import { LineChart } from "@/components/charts/LineChart";
 import { PieChart } from "@/components/charts/PieChart";
 
 export default function EmployerDashboard() {
@@ -95,7 +93,7 @@ export default function EmployerDashboard() {
             <CardDescription>Monthly job posting activity</CardDescription>
           </CardHeader>
           <CardContent>
-            <LineChart data={jobPostingData} />
+            <div className="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">Chart placeholder</div>
           </CardContent>
         </Card>
 
@@ -105,7 +103,7 @@ export default function EmployerDashboard() {
             <CardDescription>Applications received per month</CardDescription>
           </CardHeader>
           <CardContent>
-            <BarChart data={applicationTrendData} />
+            <div className="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">Chart placeholder</div>
           </CardContent>
         </Card>
       </div>

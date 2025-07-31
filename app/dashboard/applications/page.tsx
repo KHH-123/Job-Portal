@@ -39,7 +39,7 @@ export default async function ApplicationsPage() {
     switch (status) {
       case 'pending':
         return <Clock className="h-4 w-4 text-yellow-500" />;
-      case 'reviewed':
+      case 'reviewing':
         return <Eye className="h-4 w-4 text-blue-500" />;
       case 'interview':
         return <MessageCircle className="h-4 w-4 text-purple-500" />;
@@ -56,7 +56,7 @@ export default async function ApplicationsPage() {
     switch (status) {
       case 'pending':
         return 'bg-yellow-100 text-yellow-800';
-      case 'reviewed':
+      case 'reviewing':
         return 'bg-blue-100 text-blue-800';
       case 'interview':
         return 'bg-purple-100 text-purple-800';
@@ -118,7 +118,7 @@ export default async function ApplicationsPage() {
           <div className="text-sm text-gray-600">Pending</div>
         </Card>
         <Card className="p-4">
-          <div className="text-2xl font-bold text-blue-600">{statusCounts.reviewed || 0}</div>
+          <div className="text-2xl font-bold text-blue-600">{statusCounts.Reviewed || 0}</div>
           <div className="text-sm text-gray-600">Reviewed</div>
         </Card>
         <Card className="p-4">
@@ -205,7 +205,6 @@ export default async function ApplicationsPage() {
                           </div>
                           <div className="flex items-center">
                             <Badge variant="outline" className="text-xs">
-                              {application.workMode}
                             </Badge>
                           </div>
                         </div>
@@ -224,7 +223,7 @@ export default async function ApplicationsPage() {
                     <div className="flex items-center mt-3 text-sm">
                       <DollarSign className="h-4 w-4 mr-1 text-gray-400" />
                       <span className="font-medium text-gray-900">
-                        {formatSalary(Number(application.salaryMin), Number(application.salaryMax))}
+                        {application.salary || "Salary not specified"}
                       </span>
                     </div>
 
@@ -233,11 +232,6 @@ export default async function ApplicationsPage() {
                       <div className="flex items-center text-sm text-gray-500">
                         <Calendar className="h-4 w-4 mr-1" />
                         <span>Applied {formatDate(application.appliedAt)}</span>
-                        {application.reviewedAt && (
-                          <span className="ml-4">
-                            • Reviewed {formatDate(application.reviewedAt)}
-                          </span>
-                        )}
                       </div>
                       
                       <div className="flex items-center space-x-2">
@@ -248,7 +242,7 @@ export default async function ApplicationsPage() {
                           </Button>
                         </Link>
                         
-                        {(application.status === 'pending' || application.status === 'reviewed') && (
+                        {(application.status === 'pending' || application.status === 'reviewing') && (
                           <WithdrawApplicationButton 
                             applicationId={application.id}
                             jobTitle={application.jobTitle}

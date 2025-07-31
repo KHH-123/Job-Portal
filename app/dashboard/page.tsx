@@ -1,7 +1,4 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AreaChart } from "@/components/charts/AreaChart";
-import { LineChart } from "@/components/charts/LineChart";
-import { PieChart } from "@/components/charts/PieChart";
 
 export default function JobSeekerDashboard() {
   // Mock data for demo
@@ -95,7 +92,7 @@ export default function JobSeekerDashboard() {
             <CardDescription>Your application submissions over time</CardDescription>
           </CardHeader>
           <CardContent>
-            <AreaChart data={applicationTrendData} />
+            <div className="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">Chart placeholder</div>
           </CardContent>
         </Card>
 
@@ -105,7 +102,7 @@ export default function JobSeekerDashboard() {
             <CardDescription>Employer responses to your applications</CardDescription>
           </CardHeader>
           <CardContent>
-            <LineChart data={responseRateData} />
+            <div className="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">Chart placeholder</div>
           </CardContent>
         </Card>
       </div>
@@ -117,7 +114,7 @@ export default function JobSeekerDashboard() {
             <CardDescription>Current status of your applications</CardDescription>
           </CardHeader>
           <CardContent>
-            <PieChart data={applicationStatusData} />
+            <div className="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-500">Chart placeholder</div>
           </CardContent>
         </Card>
 

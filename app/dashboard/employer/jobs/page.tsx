@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
-import { UserDebug } from '@/components/debug/UserDebug';
 
 export default async function EmployerJobsPage() {
   const user = await getUser();
@@ -102,7 +101,6 @@ export default async function EmployerJobsPage() {
   return (
     <div className="space-y-6">
       {/* Temporary debug component - remove after testing */}
-      <UserDebug />
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">My Jobs</h1>

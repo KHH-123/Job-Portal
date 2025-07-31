@@ -300,7 +300,6 @@ export default async function ApplicationDetailPage({ params }: { params: Promis
             <ApplicationStatusUpdate
               applicationId={application.id}
               currentStatus={application.status}
-              currentNotes={application.notes || ''}
             />
 
             {/* Application Timeline */}
